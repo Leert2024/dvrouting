@@ -1,0 +1,398 @@
+Enter TRACE:1
+node 0 init distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 999     999     999     999
+    2 | 999     999     999     999
+    3 | 999     999     999     999
+
+node 0 send pkt to 1
+node 0 send pkt to 2
+node 0 send pkt to 3
+node 1 init distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 999     999     999     999
+    1 | 1       0       1       999
+    2 | 999     999     999     999
+
+node 1 send pkt to 0
+node 1 send pkt to 2
+node 2 init distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 999     999     999     999
+    1 | 999     999     999     999
+    2 | 3       1       0       2
+    3 | 999     999     999     999
+
+node 2 send pkt to 0
+node 2 send pkt to 1
+node 2 send pkt to 3
+node 3 init distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 999     999     999     999
+    2 | 999     999     999     999
+    3 | 7       999     2       0
+
+node 3 send pkt to 0
+node 3 send pkt to 2
+node 1 recv from 0
+node 1 update distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       8
+    2 | 999     999     999     999
+
+node 1 send pkt to 0
+node 1 send pkt to 2
+node 1 recv from 2
+node 1 update distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+
+node 1 send pkt to 0
+node 1 send pkt to 2
+node 0 recv from 1
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       7
+    1 | 1       0       1       999
+    2 | 999     999     999     999
+    3 | 999     999     999     999
+
+node 0 send pkt to 1
+node 0 send pkt to 2
+node 0 send pkt to 3
+node 3 recv from 0
+node 3 update distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    2 | 999     999     999     999
+    3 | 7       8       2       0
+
+node 3 send pkt to 0
+node 3 send pkt to 2
+node 2 recv from 0
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 999     999     999     999
+    2 | 3       1       0       2
+    3 | 999     999     999     999
+
+node 2 DV remain.
+node 0 recv from 2
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       999
+    2 | 3       1       0       2
+    3 | 999     999     999     999
+
+node 0 send pkt to 1
+node 0 send pkt to 2
+node 0 send pkt to 3
+node 3 recv from 2
+node 3 update distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    2 | 3       1       0       2
+    3 | 5       3       2       0
+
+node 3 send pkt to 0
+node 3 send pkt to 2
+node 0 recv from 3
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       999
+    2 | 3       1       0       2
+    3 | 7       999     2       0
+
+node 0 DV remain.
+node 0 recv from 1
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       8
+    2 | 3       1       0       2
+    3 | 7       999     2       0
+
+node 0 DV remain.
+node 2 recv from 1
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       999
+    2 | 2       1       0       2
+    3 | 999     999     999     999
+
+node 2 send pkt to 0
+node 2 send pkt to 1
+node 2 send pkt to 3
+node 1 recv from 0
+node 1 update distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       7
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+
+node 1 DV remain.
+node 0 recv from 1
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+    3 | 7       999     2       0
+
+node 0 DV remain.
+node 3 recv from 0
+node 3 update distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       7
+    2 | 3       1       0       2
+    3 | 5       3       2       0
+
+node 3 DV remain.
+node 2 recv from 3
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       999
+    2 | 2       1       0       2
+    3 | 7       999     2       0
+
+node 2 DV remain.
+node 0 recv from 3
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+    3 | 7       8       2       0
+
+node 0 DV remain.
+node 1 recv from 0
+node 1 update distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+
+node 1 DV remain.
+node 1 recv from 2
+node 1 update distance table:
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+
+node 1 DV remain.
+node 2 recv from 1
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       8
+    2 | 2       1       0       2
+    3 | 7       999     2       0
+
+node 2 DV remain.
+node 3 recv from 0
+node 3 update distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    2 | 3       1       0       2
+    3 | 5       3       2       0
+
+node 3 DV remain.
+node 0 recv from 3
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 3       1       0       2
+    3 | 5       3       2       0
+
+node 0 DV remain.
+node 2 recv from 1
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       3       7
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 7       999     2       0
+
+node 2 DV remain.
+node 3 recv from 2
+node 3 update distance table:
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    2 | 2       1       0       2
+    3 | 4       3       2       0
+
+node 3 send pkt to 0
+node 3 send pkt to 2
+node 0 recv from 2
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 5       3       2       0
+
+node 0 DV remain.
+node 2 recv from 0
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       7
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 7       999     2       0
+
+node 2 DV remain.
+node 2 recv from 3
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       7
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 7       8       2       0
+
+node 2 DV remain.
+node 0 recv from 3
+node 0 update distance table:
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 4       3       2       0
+
+node 0 DV remain.
+node 2 recv from 0
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 7       8       2       0
+
+node 2 DV remain.
+node 2 recv from 3
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 5       3       2       0
+
+node 2 DV remain.
+node 2 recv from 3
+node 2 update distance table:
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 4       3       2       0
+
+node 2 DV remain.
+
+Simulator terminated at t=20000.000000, no packets in medium
+Results:
+
+           to
+   D0 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 4       3       2       0
+
+           to
+   D1 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+
+           to
+   D2 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    1 | 1       0       1       3
+    2 | 2       1       0       2
+    3 | 4       3       2       0
+
+           to
+   D3 | 0       1       2       3
+  ----|--------------------------------
+    0 | 0       1       2       4
+    2 | 2       1       0       2
+    3 | 4       3       2       0
