@@ -1,5 +1,4 @@
 # DV算法实验报告
-2024217803班 李睿彤 2024212654
 
 ## 作业要求
 https://media.pearsoncmg.com/aw/aw_kurose_network_3/labs/lab6/lab6.html
@@ -55,6 +54,16 @@ def update(src: int, mincosts: list[int]):
     if 自己的距离向量有更新:
         向所有邻居汇报自己的距离向量()
 ```
+直连开销出现波动时的应对算法：
+```python
+def linkhandler(linkid: int, newcost: int):
+    connectcosts[linkid] = newcost
+    计算自己旧的距离向量()
+    costs[linkid][linkid] = newcost
+    计算自己新的距离向量()
+    if 自己的距离向量有更新:
+        向所有邻居汇报自己的距离向量()
+```
 
 ## 第二种DV算法(from-to)
 节点`n`的距离表初始化(Python风格伪代码)：
@@ -72,10 +81,28 @@ for frm in range(4):
 ```python
 def update(src: int, mincosts: list[int]):
     costs[src] = mincosts
-    # 贝尔曼-福特算法(无需遍历所有邻居，因为只有通知自己的邻居有可能提供更短的开销)
+    记录自己的旧的距离向量()
+
+    # 贝尔曼-福特算法
     for to in range(4):
-        if(costs[n][to] > costs[n][src] + mincosts[to]):
-            costs[n][to] = costs[n][src] + mincosts[to]
+        if to == n:
+            continue # 自己到自己，开销为0
+        min = INFINITY
+        for frm in n的邻居:
+            if costs[frm][to] + connectcosts[frm] < min:
+                min = costs[frm][to] + connectcosts[frm]
+        costs[to] = min
+
+    if 自己的距离向量有更新:
+        向所有邻居汇报自己的距离向量()
+```
+直连开销出现波动时的应对算法：
+```python
+def linkhandler(linkid: int, newcost: int):
+    connectcosts[linkid] = newcost
+    记录自己旧的距离向量()
+    # 贝尔曼-福特算法
+    # ...(同上一栏)
     if 自己的距离向量有更新:
         向所有邻居汇报自己的距离向量()
 ```
@@ -87,8 +114,24 @@ def update(src: int, mincosts: list[int]):
 4. 按照算法的伪代码，使用C语言实现算法。
 
 ## 实验结果
-dest-via式算法运行结果见[dest_via.txt](docs/dest_via.txt)
-from-to式算法运行结果见[from_to.txt](docs/from_to.txt)
+无开销波动([prog3.c](src/prog3.c)中`#define LINKCHANGES 0`)情况下：
+- dest-via式算法运行结果见[dest_via.txt](docs/dest_via.txt)  
+- from-to式算法运行结果见[from_to.txt](docs/from_to.txt)
+
+有开销波动([prog3.c](src/prog3.c)中`#define LINKCHANGES 1`)情况下，当0到1间的直连开销突变为20时：
+- dest-via式算法运行结果见[dest_via_chg20.txt](docs/dest_via_chg20.txt)  
+- from-to式算法运行结果见[from_to_chg20.txt](docs/from_to_chg20.txt)
+
+稳定后，0到1间的直连开销又变为1时：
+- dest-via式算法运行结果见[dest_via_chg1.txt](docs/dest_via_chg1.txt)  
+- from-to式算法运行结果见[from_to_chg1.txt](docs/from_to_chg1.txt)
 
 ## 遇到的问题与解决办法
 - 第一次编译报很多错，后发代码采用C89标准，故在CMakeLists.txt中添加`set(CMAKE_C_STANDARD 90)`，成功编译；
+- 需注意贝尔曼-福特算法中，
+    > “x到y的最短距离=min{邻居到y的最短距离+x到邻居的**直连**距离}”
+
+    容易错写为
+    > “x到y的最短距离=min{邻居到y的最短距离+x到邻居的**最短**距离}”
+
+    后者导致波动无反应。

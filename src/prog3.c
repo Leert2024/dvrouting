@@ -1,7 +1,7 @@
 # include "common.h"
 # include <stdlib.h>
 
-#define LINKCHANGES 1 
+#define LINKCHANGES 1
 /* ******************************************************************
 Programming assignment 3: implementing distributed, asynchronous,
                           distance vector routing.

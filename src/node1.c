@@ -1,7 +1,7 @@
 #include "common.h"
 
 static const int is_neighbor1[4] = {1, 0, 1, 0};
-static const int connectcosts1[4] = {1, 0, 1, INFINITY};
+int connectcosts1[4] = {1, 0, 1, INFINITY};
 struct distance_table dt1;
 
 extern int TRACE;
@@ -19,7 +19,7 @@ rtinit1()
 rtupdate1(rcvdpkt)
   struct rtpkt *rcvdpkt;
 {
-  rtupdate(rcvdpkt, &dt1, 1, is_neighbor1);
+  rtupdate(rcvdpkt, &dt1, 1, is_neighbor1, connectcosts1);
 }
 
 
@@ -38,6 +38,7 @@ int linkid, newcost;
 /* constant definition in prog3.c from 0 to 1 */
 	
 {
+  linkhandler(linkid, newcost, 1, &dt1, is_neighbor1, connectcosts1);
 }
 
 

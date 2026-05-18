@@ -1,7 +1,7 @@
 #include "common.h"
 
 static const int is_neighbor2[4] = {1, 1, 0, 1};
-static const int connectcosts2[4] = {3, 1, 0, 2};
+int connectcosts2[4] = {3, 1, 0, 2};
 struct distance_table dt2;
 
 extern int TRACE;
@@ -18,7 +18,7 @@ void rtinit2()
 void rtupdate2(rcvdpkt)
   struct rtpkt *rcvdpkt;
 {
-  rtupdate(rcvdpkt, &dt2, 2, is_neighbor2);
+  rtupdate(rcvdpkt, &dt2, 2, is_neighbor2, connectcosts2);
 }
 
 

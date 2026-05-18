@@ -19,7 +19,8 @@ struct rtpkt {
 };
 
 void printdt(dt, node_idx, is_neighbor);
-void rtupdate(rcvdpkt, dtptr, node_idx, is_neighbor);
+void rtupdate(rcvdpkt, dtptr, node_idx, is_neighbor, connectcosts);
 void rtinit(node_idx, dtptr, is_neighbor, connectcosts);
+void linkhandler(linkid, newcost, node_idx, dtptr, is_neighbor, connectcosts);
 
 # endif
